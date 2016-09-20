@@ -1,99 +1,166 @@
-###########################
-#  Configuration
-###########################
+" This must be set first due to side effects on following properties
+set nocompatible
 
-# use 256 term for pretty colors
-set -g default-terminal "screen-256color"
+" Load vim-plug
+call plug#begin('~/.vim/plugged')
+
+" Tiled Window Management for Vim; fetches https://github.com/spolu/dwm.vim
+Plug 'spolu/dwm.vim'
+
+" File tree; fetches https://github.com/scrooloose/nerdtree
+Plug 'scrooloose/nerdtree'
+
+" Aynchronous execution library; fetches https://github.com/Shougo/vimproc.vim
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" Configuration for Unite; fetches https://github.com/Arlefreak/vim-unite-config
+Plug 'Arlefreak/vim-unite-config'
+
+" The fastest way to navigate your files; fetches https://github.com/rstacruz/vim-fastunite
+Plug 'rstacruz/vim-fastunite'
+
+" Fearch and display information from arbitrary sources; fetches https://github.com/Shougo/unite.vim
+Plug 'Shougo/unite.vim'
+
+" Editorconfig support; fetches https://github.com/editorconfig/editorconfig-vim.git
+Plug 'editorconfig/editorconfig-vim'
+
+" Emmet for vim; fetches https://github.com/mattn/emmet-vim
+Plug 'mattn/emmet-vim'
+
+" Change outside tags; fetches https://github.com/tpope/vim-surround
+Plug 'tpope/vim-surround'
+
+" Autoclose tags; fetches https://github.com/Townk/vim-autoclose
+Plug 'Townk/vim-autoclose'
+
+" Indent guides; fetches https://github.com/nathanaelkane/vim-indent-guides
+Plug 'nathanaelkane/vim-indent-guides'
+
+" Dark theme for VIM; fetches https://github.com/w0ng/vim-hybrid
+Plug 'w0ng/vim-hybrid'
+
+" Markdown support; fetches https://github.com/tpope/vim-markdown
+Plug 'tpope/vim-markdown'
+
+" Nunjucks support; fetches https://github.com/lepture/vim-jinja
+Plug 'lepture/vim-jinja'
+
+" Stylus support; fetches https://github.com/wavded/vim-stylus
+Plug 'wavded/vim-stylus'
+
+" Javascript support; fetches https://github.com/pangloss/vim-javascript
+Plug 'pangloss/vim-javascript'
+
+" Javascript support; fetches https://github.com/jelera/vim-javascript-syntax
+Plug 'jelera/vim-javascript-syntax'
+
+" jQuery support; fetches https://github.com/itspriddle/vim-jquery
+Plug 'itspriddle/vim-jquery'
 
 
-# increase scroll-back history
-set -g history-limit 5000
+" Add plugins to &runtimepath
+call plug#end()
 
-# set Ctrl-a as the default prefix key combination
-# and unbind C-b to free it up
-set -g prefix C-a
-unbind C-b
 
-# split panes using | and -
-bind | split-window -h
-bind - split-window -v
-unbind '"'
-unbind %
+" Enable indents
+filetype plugin indent on
 
-# move pbpaste into tmux paste buffer
-bind C-v run "tmux set-buffer \"$(pbpaste -o)\"; tmux paste-buffer"
-# move tmux copy buffer into pbcopy
-bind C-c run "tmux save-buffer - | pbcopy -selection c"\; display-message "Buffer copied to clipboard"
+" show existing tab with 4 spaces width
+set tabstop=4
 
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
 
-# decrease command delay (increases vim responsiveness)
-set -sg escape-time 1
+" On pressing tab, insert 4 spaces
+set expandtab
 
-# increase repeat time for repeatable commands
-set -g repeat-time 1000
+" Change the mapleader from \ to ,
+let mapleader=","
 
-# start window index at 1
-set -g base-index 1
+" Reload the .vimrc on change
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 
-# start pane index at 1
-setw -g pane-base-index 1
+" Hides buffers instead closing them
+set hidden
 
-# highlight window when it has new activity
-setw -g monitor-activity on
-set -g visual-activity on
+" Don't wrap lines
+set nowrap
 
-set -g set-titles on
-set -g set-titles-string "#T"
+" Allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set autoindent
+set copyindent
+set number
+set shiftround
+set showmatch
+set ignorecase
+set smartcase
+set smarttab
+set hlsearch
+set incsearch
 
-# not really sure what this does, but with it, the scrollwheel works inside Vim
-set-option -g mouse-utf8 on
+" Buffer settings
+set history=100
+set undolevels=100
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set title
+set visualbell
+set noerrorbells
+set nobackup
+set noswapfile
 
-# Enable mouse mode (tmux 2.1 and above)
-set -g mouse on
+" File type plugins
+filetype plugin indent on
 
-# allow mouse to enter copy mode and initiate selection
-set-window-option -g mode-mouse on
+" Enable syntax highlighting
+syntax on
 
-set -g default-terminal "screen"
+" Set global clipboard
+set clipboard=unnamed
 
-# reload config file (change file location to your the tmux.conf you want to use)
-bind r source-file ~/.tmux.conf
+" Colors
+set background=dark
+colorscheme hybrid
 
-###########################
-# Status Bar
-###########################
+" Plugin: Fuzzy finder 
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_modules'
 
-# set color for status bar
-set-option -g status-bg colour235 #base02
-set-option -g status-fg yellow #yellow
-set-option -g status-attr dim
+" Remap : to ; to give up on using shift key
+nnoremap ; :
 
-# set window list colors - red for active and cyan for inactive
-set-window-option -g window-status-fg brightblue #base0
-set-window-option -g window-status-bg colour236
-set-window-option -g window-status-attr dim
+" Plugin: Unite
+" Install `brew install the_silver_searcher`
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
-set-window-option -g window-status-current-fg brightred #orange
-set-window-option -g window-status-current-bg colour236
-set-window-option -g window-status-current-attr bright
+map <C-p> [unite]p
+nnoremap <space>/ :Unite grep:.<cr>
+nnoremap <space>e :Unite -no-split -buffer-name=buffer -quick-match buffer<cr>
+let g:unite_enable_split_vertically = 0
+let g:unite_winheight = 30
+let g:unite_data_directory = '~/.vim/tmp/unite/'
+let g:unite_source_grep_default_opts = '--column --no-color --nogroup --with-filename'
 
-# enable UTF-8 support in status bar
-set -g status-utf8 on
-set -g utf8
-set-window-option -g utf8 on
 
-# set refresh interval for status bar
-set -g status-interval 30
+" Plugin NerdTree
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-# center the status bar
-set -g status-justify left
+" Plugin: indent guides
+set ts=4 sw=4 et
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 5
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
-# show session, window, pane in left status bar
-set -g status-left-length 40
-set -g status-left '#[fg=red]#S#[fg=blue] #I:#P#[default]'
+" Plugin: Jinja
+au BufNewFile,BufRead *.html,*.htm,*.njk,*.nunjucks set ft=jinja
 
-# show hostname, date, time, and battery in right status bar
-set-option -g status-right '#[fg=red]#H#[default] %m/%d/%y %I:%M\
- #[fg=red]#(battery discharging)#[default]#(battery charging)'
+
