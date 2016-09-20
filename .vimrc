@@ -13,14 +13,26 @@ Plug 'scrooloose/nerdtree'
 " Fuzzy file, buffer, mru, tag, etc finder; fetches https://github.com/kien/ctrlp.vim
 Plug 'kien/ctrlp.vim'
 
+" Fearch and display information from arbitrary sources; fetches https://github.com/Shougo/unite.vim
+Plug 'Shougo/unite.vim'
+
 " Emmet for vim; fetches https://github.com/mattn/emmet-vim
 Plug 'mattn/emmet-vim'
 
 " Change outside tags; fetches https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
 
+" Autoclose tags; fetches https://github.com/Townk/vim-autoclose
+Plug 'Townk/vim-autoclose'
+
+" Indent guides; fetches https://github.com/nathanaelkane/vim-indent-guides
+Plug 'nathanaelkane/vim-indent-guides'
+
 " Dark theme for VIM; fetches https://github.com/w0ng/vim-hybrid
 Plug 'w0ng/vim-hybrid'
+
+" Markdown support; fetches https://github.com/tpope/vim-markdown
+Plug 'tpope/vim-markdown'
 
 " Nunjucks support; fetches https://github.com/mitsuhiko/jinja2
 Plug 'mitsuhiko/jinja2'
@@ -30,6 +42,10 @@ Plug 'wavded/vim-stylus'
 
 " Javascript support; fetches https://github.com/pangloss/vim-javascript
 Plug 'pangloss/vim-javascript'
+
+" Javascript support; fetches https://github.com/jelera/vim-javascript-syntax
+Plug 'jelera/vim-javascript-syntax'
+
 
 " jQuery support; fetches https://github.com/itspriddle/vim-jquery
 Plug 'itspriddle/vim-jquery'
