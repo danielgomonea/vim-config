@@ -16,6 +16,9 @@ Plug 'kien/ctrlp.vim'
 " Fearch and display information from arbitrary sources; fetches https://github.com/Shougo/unite.vim
 Plug 'Shougo/unite.vim'
 
+" Editorconfig support; fetches https://github.com/editorconfig/editorconfig-vim.git
+Plug 'editorconfig/editorconfig-vim'
+
 " Emmet for vim; fetches https://github.com/mattn/emmet-vim
 Plug 'mattn/emmet-vim'
 
@@ -46,9 +49,9 @@ Plug 'pangloss/vim-javascript'
 " Javascript support; fetches https://github.com/jelera/vim-javascript-syntax
 Plug 'jelera/vim-javascript-syntax'
 
-
 " jQuery support; fetches https://github.com/itspriddle/vim-jquery
 Plug 'itspriddle/vim-jquery'
+
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -116,8 +119,8 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_modules'
 nnoremap ; :
 
 " Open NERDTree if no files are specified at startup
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Colors
 set background=dark
