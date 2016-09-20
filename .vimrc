@@ -37,8 +37,8 @@ Plug 'w0ng/vim-hybrid'
 " Markdown support; fetches https://github.com/tpope/vim-markdown
 Plug 'tpope/vim-markdown'
 
-" Nunjucks support; fetches https://github.com/mitsuhiko/jinja2
-Plug 'mitsuhiko/jinja2'
+" Nunjucks support; fetches https://github.com/lepture/vim-jinja
+Plug 'lepture/vim-jinja'
 
 " Stylus support; fetches https://github.com/wavded/vim-stylus
 Plug 'wavded/vim-stylus'
@@ -111,24 +111,30 @@ filetype plugin indent on
 " Enable syntax highlighting
 syntax on
 
-" Enable fuzzy finder 
+" Set global clipboard
+set clipboard=unnamed
+
+" Colors
+set background=dark
+colorscheme hybrid
+
+" Plugin: Fuzzy finder 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_modules'
 
 " Remap : to ; to give up on using shift key
 nnoremap ; :
 
-" Open NERDTree if no files are specified at startup
+" Plugin NerdTree
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Colors
-set background=dark
-colorscheme hybrid
+" Plugin: indent guides
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
-" Enable nunjucks
+" Plugin: Jinja
 au BufNewFile,BufRead *.html,*.htm,*.njk,*.nunjucks set ft=jinja
 
-" Set global clipboard
-set clipboard=unnamed
 
