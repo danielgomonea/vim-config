@@ -1,12 +1,46 @@
 " This must be set first due to side effects on following properties
 set nocompatible
 
-" Use pathogen to easily modify the runtime path to include all
-" plugins under the ~/.vim/bundle directory
-call pathogen#helptags()
-call pathogen#infect()
+" Load vim-plug
+call plug#begin('~/.vim/plugged')
 
+" Tiled Window Management for Vim; fetches https://github.com/spolu/dwm.vim
+Plug 'spolu/dwm.vim'
+
+" File tree; fetches https://github.com/scrooloose/nerdtree
+Plug 'scrooloose/nerdtree'
+
+" Fuzzy file, buffer, mru, tag, etc finder; fetches https://github.com/kien/ctrlp.vim
+Plug 'kien/ctrlp.vim'
+
+" Emmet for vim; fetches https://github.com/mattn/emmet-vim
+Plug 'mattn/emmet-vim'
+
+" Change outside tags; fetches https://github.com/tpope/vim-surround
+Plug 'tpope/vim-surround'
+
+" Dark theme for VIM; fetches https://github.com/w0ng/vim-hybrid
+Plug 'w0ng/vim-hybrid'
+
+" Nunjucks support; fetches https://github.com/mitsuhiko/jinja2
+Plug 'mitsuhiko/jinja2'
+
+" Stylus support; fetches https://github.com/wavded/vim-stylus
+Plug 'wavded/vim-stylus'
+
+" Javascript support; fetches https://github.com/pangloss/vim-javascript
+Plug 'pangloss/vim-javascript'
+
+" jQuery support; fetches https://github.com/itspriddle/vim-jquery
+Plug 'itspriddle/vim-jquery'
+
+" Add plugins to &runtimepath
+call plug#end()
+
+
+" Enable indents
 filetype plugin indent on
+
 " show existing tab with 4 spaces width
 set tabstop=4
 
@@ -78,3 +112,4 @@ au BufNewFile,BufRead *.html,*.htm,*.njk,*.nunjucks set ft=jinja
 
 " Set global clipboard
 set clipboard=unnamed
+
