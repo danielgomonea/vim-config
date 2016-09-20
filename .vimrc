@@ -10,8 +10,14 @@ Plug 'spolu/dwm.vim'
 " File tree; fetches https://github.com/scrooloose/nerdtree
 Plug 'scrooloose/nerdtree'
 
-" Fuzzy file, buffer, mru, tag, etc finder; fetches https://github.com/kien/ctrlp.vim
-Plug 'kien/ctrlp.vim'
+" Aynchronous execution library; fetches https://github.com/Shougo/vimproc.vim
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" Configuration for Unite; fetches https://github.com/Arlefreak/vim-unite-config
+Plug 'Arlefreak/vim-unite-config'
+
+" The fastest way to navigate your files; fetches https://github.com/rstacruz/vim-fastunite
+Plug 'rstacruz/vim-fastunite'
 
 " Fearch and display information from arbitrary sources; fetches https://github.com/Shougo/unite.vim
 Plug 'Shougo/unite.vim'
@@ -72,9 +78,11 @@ set expandtab
 " Change the mapleader from \ to ,
 let mapleader=","
 
-" Quickly edit/reload the .vimrc
-nmap <silent> <leader>ev :e $MYVIMR<CR>
-nmap <silent> <leader>sv :so $MYVIMR<CR>
+" Reload the .vimrc on change
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
 
 " Hides buffers instead closing them
 set hidden
@@ -124,6 +132,20 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_modules'
 
 " Remap : to ; to give up on using shift key
 nnoremap ; :
+
+" Plugin: Unite
+" Install `brew install the_silver_searcher`
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+map <C-p> [unite]p
+nnoremap <space>/ :Unite grep:.<cr>
+nnoremap <space>e :Unite -no-split -buffer-name=buffer -quick-match buffer<cr>
+let g:unite_enable_split_vertically = 0
+let g:unite_winheight = 30
+let g:unite_data_directory = '~/.vim/tmp/unite/'
+let g:unite_source_grep_default_opts = '--column --no-color --nogroup --with-filename'
+
 
 " Plugin NerdTree
 " autocmd StdinReadPre * let s:std_in=1
