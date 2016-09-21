@@ -682,11 +682,6 @@ let g:unite_winheight = 30
 let g:unite_data_directory = '~/.vim/tmp/unite/'
 let g:unite_source_grep_default_opts = '--column --no-color --nogroup --with-filename'
 
-
-" Plugin NerdTree
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " Plugin: indent guides
 set ts=4 sw=4 et
 let g:indent_guides_auto_colors = 1
