@@ -34,6 +34,12 @@ endif " has autocmd
 " remap : to ; to give up on using shift key
 nnoremap ; :
 
+" do sudo if write if using !!
+cmap w!! w !sudo tee % >/dev/null
+
+" enable mouse scrolling
+set mouse=a
+
 " -- backup and swap files -----------------------------------------------------
 
 set backup      " enable backup files
@@ -551,6 +557,9 @@ if has("autocmd")
   augroup END
 endif
 
+" unset the "last search pattern" register by hitting return
+nnoremap <CR> :let @/ = ""<CR><CR>
+
 set ignorecase  " case insensitive search
 set smartcase   " case insensitive only if search pattern is all lowercase
                 "   (smartcase requires ignorecase)
@@ -575,7 +584,6 @@ endfunction
 " center screen on next/previous match, blink current match
 noremap <silent> n nzzzv:call BlinkMatch(0.2)<CR>
 noremap <silent> N Nzzzv:call BlinkMatch(0.2)<CR>
-
 
 function! GetVisualSelection()
   let [l:l1, l:c1] = getpos("'<")[1:2]
@@ -681,11 +689,6 @@ let g:unite_enable_split_vertically = 0
 let g:unite_winheight = 30
 let g:unite_data_directory = '~/.vim/tmp/unite/'
 let g:unite_source_grep_default_opts = '--column --no-color --nogroup --with-filename'
-
-
-" Plugin NerdTree
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Plugin: indent guides
 set ts=4 sw=4 et
