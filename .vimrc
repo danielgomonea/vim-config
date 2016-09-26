@@ -5,7 +5,7 @@
 "		http://apps.graffino.com
 "
 " Version: 
-"       1.0 - 26/09/2016
+"       1.2.1 - 26/09/2016
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -26,7 +26,9 @@ set undolevels=1000 	  " Boost undo levels
 
 let mapleader=","  		  " Change the mapleader from \ to ,
 let maplocalleader=","    " Change local leader key to ,
-nnoremap ; : 			  " Remap : to ; (for usage without shift key)
+
+" Remap : to ; (for usage without shift key)
+nnoremap ; : 			 
 
 " Do sudo before writting if using !!
 cmap w!! w !sudo tee % >/dev/null
@@ -109,11 +111,17 @@ set shiftround    			" Use multiple of shiftwidth when indenting with '<' and '>
 " Better completion
 set completeopt=longest,menuone,preview 
 
-" Moving stuff
-noremap <silent>- :m+<CR> 			" Move current line down
-noremap <silent>_ :m-2<CR>			" Move current line up
-vnoremap <silent>- :m '>+1<CR>gv=gv " Move visual selection down
-vnoremap <silent>_ :m '<-2<CR>gv=gv " Move visual selection up
+" Move current line down
+noremap <silent>- :m+<CR>
+
+" Move current line up
+noremap <silent>_ :m-2<CR>
+
+"Move visual selection down
+vnoremap <silent>- :m '>+1<CR>gv=gv
+
+"Move visual selection down
+vnoremap <silent>_ :m '<-2<CR>gv=gv
 
 " CTRL-S saves file
 "nnoremap <C-s> :w<CR>
